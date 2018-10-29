@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<!--<head>-->
+
+    <!--<meta charset="utf-8">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+
+    <!--<title>loafer</title>-->
+    <!--<style type="text/css">-->
+        <!--body {-->
+            <!--overflow: hidden;-->
+        <!--}-->
+    <!--</style>-->
+<!--</head>-->
+
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico">
+    <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111">
+    <link rel="canonical" href="https://codepen.io/rthavi/pen/RevVzY">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+    <style type="text/css" class="cp-pen-styles">
+        body {
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+
+<!--<script src="../../js/jquery-2.1.1.js"></script>-->
+<!--<script src="../../js/index.js"></script>-->
+<body>
+<script src="https://static.codepen.io/assets/editor/live/console_runner-ce3034e6bde3912cc25f83cccb7caa2b0f976196f2f2d52303a462c826d54a73.js"></script>
+<script src="https://static.codepen.io/assets/editor/live/css_reload-2a5c7ad0fe826f66e054c6020c99c1e1c63210256b6ba07eb41d7a4cb0d0adab.js"></script>
+<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-41c52890748cd7143004e05d3c5f786c66b19939c4500ce446314d1748483e13.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
+
+<script>var h = window.innerHeight,
+    w = window.innerWidth;
+
+    function setup() {
+        createCanvas(w, h, WEBGL);
+        noStroke();
+        camera(0, 100, 500, 0, 0, 0, 0, 1, 0);
+        pointLight(200, 150, 200, 0, 0, 500);
+        pointLight(100, 100, 100, 500, 0, 300);
+        pointLight(100, 100, 100, -500, 0, 300);
+    }
+
+    function draw() {
+        background(0);
+        orbitControl();
+        var sceneRotation = frameCount * 0.0015;
+        rotateY(sceneRotation);
+        for (var a = 0; a < 360; a += 5) {if (window.CP.shouldStopExecution(0)) break;
+            let ringAngle = radians(a);
+            push();
+            rotateY(ringAngle);
+            push();
+            translate(0, 0, 150);
+            rotateY(Math.PI / 2);
+            rotateX(Math.PI / 3.5);
+            let rVal = a % 2 == 0 ? 255 : 0;
+            let n = noise(frameCount * 0.01, ringAngle * 0.01, a * 0.01);
+            specularMaterial(rVal, 50, 255 * n);
+            torus(350, 6, 60, 32);
+            pop();
+            pop();
+        }window.CP.exitedLoop(0);
+    }
+//# sourceURL=pen.js
+</script>
+<canvas id="defaultCanvas0" class="p5Canvas" width="1920" height="498" style="width: 1920px; height: 498px;"></canvas></body>
+</html>
